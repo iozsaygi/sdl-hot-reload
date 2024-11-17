@@ -1,2 +1,1 @@
-# sdl-hot-reload
-SDL development environment with hot reload support.
+Work in progress, this file will be updated eventually.
