@@ -18,7 +18,15 @@ set(CMAKE_SHARED_MODULE_PREFIX "")
 
 # Do not allow in-source builds.
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
-    message(FATAL_ERROR "In-source builds are not allowed")
+    message(FATAL_ERROR "In-source builds are not allowed, please create a 'build' directory to trigger CMake build.")
+endif ()
+
+# 'MSVC' related commands.
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    message("Performing 'MSVC' specific operations.")
+
+    # Enable all warnings and treat warnings as errors.
+    add_compile_options(/W4 /WX)
 endif ()
 
 # The 'Engine' project will be compiled as executable and will watch over working directory to detect changes at runtime.
