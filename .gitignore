@@ -34,3 +34,4 @@
 # Custom directories
 .idea
 build
+cmake-build-debug
