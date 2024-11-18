@@ -1,6 +1,7 @@
-// This is totally dummy file and will be removed later on.
+#include <iostream>
 
-int ReturnExactlySame(const int x)
+int main(int argc, char* argv[])
 {
-    return x;
+    std::cout << "Entry point";
+    return 0;
 }
