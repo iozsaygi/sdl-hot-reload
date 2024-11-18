@@ -10,6 +10,11 @@ set(CMAKE_STATIC_LIBRARY_PREFIX "")
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
 set(CMAKE_SHARED_MODULE_PREFIX "")
 
+# Do not allow in-source builds.
+if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
+    message(FATAL_ERROR "In-source builds are not allowed")
+endif ()
+
 # The 'Engine' project will be compiled as executable and will watch over working directory to detect changes at runtime.
 add_subdirectory(Engine)
 
