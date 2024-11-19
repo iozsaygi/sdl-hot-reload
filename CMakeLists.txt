@@ -32,5 +32,5 @@ endif ()
 # The 'Engine' project will be compiled as executable and will watch over working directory to detect changes at runtime.
 add_subdirectory(Engine)
 
-# The 'Player' project will be compiled as shared library and will contain code related to SDL.
-add_subdirectory(Player)
+# The 'Kernel' project will be compiled as shared library and will contain code related to SDL.
+add_subdirectory(Kernel)
