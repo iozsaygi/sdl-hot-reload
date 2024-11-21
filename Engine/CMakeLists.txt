@@ -30,4 +30,4 @@ add_executable(${PROJECT_NAME} Engine.cpp)
 include_directories(${SDL2_INCLUDE_DIR})
 
 # Link the SDL library.
-target_link_libraries(${PROJECT_NAME} SDL2::SDL2)
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
