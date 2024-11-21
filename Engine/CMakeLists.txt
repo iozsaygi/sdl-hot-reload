@@ -17,7 +17,15 @@ if (WIN32)
     include(FetchContent)
     FetchContent_Declare(SDL URL ${SDL_DOWNLOAD_URL} SOURCE_DIR ${SDL_EXTRACTION_DIRECTORY} DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
     FetchContent_MakeAvailable(SDL)
+
+    find_package(SDL2 REQUIRED)
 endif ()
 
 # Register source files for 'Engine' project.
 add_executable(${PROJECT_NAME} Engine.cpp)
+
+# Add SDL include directory.
+include_directories(${SDL2_INCLUDE_DIR})
+
+# Link the SDL library.
+target_link_libraries(${PROJECT_NAME} SDL2::SDL2)

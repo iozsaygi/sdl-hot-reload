@@ -6,7 +6,7 @@ project(Root)
 set(CMAKE_CXX_STANDARD 11)
 
 # Set the module directory for CMake to allow easier script locating.
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/Scripts/CMake")
+set(SDL2_DIR "${CMAKE_SOURCE_DIR}/dependencies/SDL/cmake")
 
 # Setting output directories to same directory.
 # This will help when we are executing reloading operation.
