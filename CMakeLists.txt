@@ -5,9 +5,6 @@ project(Root)
 # Set the 'CPP' standard.
 set(CMAKE_CXX_STANDARD 11)
 
-# Set the module directory for CMake to allow easier script locating.
-set(SDL2_DIR "${CMAKE_SOURCE_DIR}/dependencies/SDL/cmake")
-
 # Setting output directories to same directory.
 # This will help when we are executing reloading operation.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/build")

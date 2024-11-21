@@ -6,6 +6,8 @@ if (WIN32)
 
     include(FetchContent)
 
+    set(SDL2_DIR "${CMAKE_SOURCE_DIR}/dependencies/SDL/cmake")
+
     # Set the download URL for SDL library.
     set(SDL_DOWNLOAD_URL "https://github.com/libsdl-org/SDL/releases/download/release-2.30.9/SDL2-devel-2.30.9-VC.zip")
 
