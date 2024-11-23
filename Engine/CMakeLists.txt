@@ -24,7 +24,7 @@ if (WIN32)
 endif ()
 
 # Register source files for 'Engine' project.
-add_executable(${PROJECT_NAME} Engine.cpp)
+add_executable(${PROJECT_NAME} Engine.cpp Debugger.cpp)
 
 # Add SDL include directory.
 include_directories(${SDL2_INCLUDE_DIR})
