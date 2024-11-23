@@ -62,7 +62,7 @@ PointerAlignment: Left
 # Allow short code lines with control flows.
 AllowShortIfStatementsOnASingleLine: true
 AllowShortLoopsOnASingleLine: true
-AllowShortCaseLabelsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: false
 
 # Prevent single line functions.
 AllowShortFunctionsOnASingleLine: None

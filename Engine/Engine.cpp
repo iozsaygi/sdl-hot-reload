@@ -33,8 +33,37 @@ int Engine_Initialize(const int width, const int height, const char* title, Engi
     }
 
     SDL_SetWindowTitle(engineEntry->Window, title);
+    Debugger_Log("Successfully initialized the engine.");
 
     return 0;
+}
+
+void Engine_Tick(EngineEntry* engineEntry)
+{
+    engineEntry->IsRunning = true;
+
+    SDL_Event event;
+
+    while (engineEntry->IsRunning)
+    {
+        // Event handling.
+        while (SDL_PollEvent(&event))
+        {
+            switch (event.type)
+            {
+                case SDL_QUIT:
+                    engineEntry->IsRunning = false;
+                    break;
+                default:;
+            }
+        }
+
+        // Render scene.
+        SDL_SetRenderDrawColor(engineEntry->Renderer, 0, 0, 0, 255);
+        SDL_RenderClear(engineEntry->Renderer);
+
+        SDL_RenderPresent(engineEntry->Renderer);
+    }
 }
 
 void Engine_Shutdown(const EngineEntry* engineEntry)

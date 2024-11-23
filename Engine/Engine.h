@@ -13,6 +13,7 @@ struct EngineEntry
 };
 
 int Engine_Initialize(int width, int height, const char* title, EngineEntry* engineEntry);
+void Engine_Tick(EngineEntry* engineEntry);
 void Engine_Shutdown(const EngineEntry* engineEntry);
 
 #endif // ENGINE_H
