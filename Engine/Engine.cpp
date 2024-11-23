@@ -1,0 +1,49 @@
+#include "Engine.h"
+#include <cassert>
+#include <cstring>
+#include "Debugger.h"
+
+int Engine_Initialize(const int width, const int height, const char* title, EngineEntry* engineEntry)
+{
+    assert(width > 0);
+    assert(height > 0);
+    assert(title != nullptr && strlen(title) > 0);
+    assert(engineEntry != nullptr);
+
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+    {
+        Debugger_Log("Failed to initialize SDL library, the reason was: %s", SDL_GetError());
+        return -1;
+    }
+
+    engineEntry->Window =
+            SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+
+    if (engineEntry->Window == nullptr)
+    {
+        Debugger_Log("Failed to create SDL window, the reason was: %s", SDL_GetError());
+        return -1;
+    }
+
+    engineEntry->Renderer = SDL_CreateRenderer(engineEntry->Window, -1, 0);
+    if (engineEntry->Renderer == nullptr)
+    {
+        Debugger_Log("Failed to create SDL renderer, the reason was: %s", SDL_GetError());
+        return -1;
+    }
+
+    SDL_SetWindowTitle(engineEntry->Window, title);
+
+    return 0;
+}
+
+void Engine_Shutdown(const EngineEntry* engineEntry)
+{
+    assert(engineEntry != nullptr);
+
+    SDL_DestroyRenderer(engineEntry->Renderer);
+    SDL_DestroyWindow(engineEntry->Window);
+    SDL_Quit();
+
+    Debugger_Log("Cleaned up allocated resources for engine.");
+}

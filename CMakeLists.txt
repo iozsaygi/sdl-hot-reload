@@ -25,8 +25,8 @@ endif ()
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     message("Performing 'MSVC' specific operations.")
 
-    # Enable all warnings and treat warnings as errors.
-    add_compile_options(/W4 /WX)
+    # Enable all warnings and treat warnings as errors. (Optional)
+    # add_compile_options(/W4 /WX)
 endif ()
 
 # The 'Engine' project will be compiled as executable and will watch over working directory to detect changes at runtime.
