@@ -11,11 +11,11 @@ AlwaysBreakTemplateDeclarations: Yes
 BraceWrapping:
   AfterCaseLabel: false
   AfterClass: false
-  AfterControlStatement: true
+  AfterControlStatement: false
   AfterEnum: false
-  AfterFunction: true
-  AfterNamespace: true
-  AfterStruct: true
+  AfterFunction: false
+  AfterNamespace: false
+  AfterStruct: false
   AfterUnion: false
   AfterExternBlock: false
   BeforeCatch: false

@@ -4,8 +4,7 @@
 #include <cstdio>
 #include <cstring>
 
-void Debugger_Log(const char* message, ...)
-{
+void Debugger_Log(const char* message, ...) {
     assert(message != nullptr && strlen(message) > 0);
 
     va_list args;

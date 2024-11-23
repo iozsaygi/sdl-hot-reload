@@ -2,8 +2,7 @@
 #include <iostream>
 #include "Debugger.h"
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     const auto argcReference = argc;
     const auto argvReference = argv;
 
@@ -13,8 +12,7 @@ int main(int argc, char* argv[])
     constexpr int x = 5;
     Debugger_Log("Main %d", x);
 
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
-    {
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
         return -1;
     }
