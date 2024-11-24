@@ -44,6 +44,7 @@ void Engine_Tick(EngineEntry* engineEntry)
 
     SDL_Event event;
 
+    Debugger_Log("Entering engine main loop.");
     while (engineEntry->IsRunning)
     {
         // Event handling.
@@ -64,6 +65,7 @@ void Engine_Tick(EngineEntry* engineEntry)
 
         SDL_RenderPresent(engineEntry->Renderer);
     }
+    Debugger_Log("Finished cycling of engine main loop.");
 }
 
 void Engine_Shutdown(const EngineEntry* engineEntry)
