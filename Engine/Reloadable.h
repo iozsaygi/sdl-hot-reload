@@ -6,7 +6,6 @@ typedef void (*Kernel_OnEngineTick)();
 
 struct Reloadable
 {
-public:
     bool IsValid;
 
     // This might differ based on the running platform.
