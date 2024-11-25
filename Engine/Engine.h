@@ -2,6 +2,7 @@
 #define ENGINE_H
 
 #include <SDL.h>
+#include "Reloadable.h"
 
 struct EngineEntry
 {
@@ -13,7 +14,7 @@ struct EngineEntry
 };
 
 int Engine_Initialize(int width, int height, const char* title, EngineEntry* engineEntry);
-void Engine_Tick(EngineEntry* engineEntry);
+void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable);
 void Engine_Shutdown(const EngineEntry* engineEntry);
 
 #endif // ENGINE_H

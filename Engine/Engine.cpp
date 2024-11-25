@@ -38,8 +38,12 @@ int Engine_Initialize(const int width, const int height, const char* title, Engi
     return 0;
 }
 
-void Engine_Tick(EngineEntry* engineEntry)
+// ReSharper disable once CppParameterMayBeConstPtrOrRef
+void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
 {
+    assert(engineEntry != nullptr);
+    assert(reloadable != nullptr);
+
     engineEntry->IsRunning = true;
 
     SDL_Event event;
