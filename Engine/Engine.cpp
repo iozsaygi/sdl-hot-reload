@@ -17,7 +17,7 @@ int Engine_Initialize(const int width, const int height, const char* title, Engi
     }
 
     engineEntry->Window =
-            SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+        SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 
     if (engineEntry->Window == nullptr)
     {

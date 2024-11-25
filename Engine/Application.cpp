@@ -6,7 +6,11 @@ int main(int argc, char* argv[])
     EngineEntry engineEntry{};
 
     // Instance to keep track of reloadable shared object.
-    Reloadable reloadable = {.IsValid = false, .SharedObjectPath = "Kernel.dll", .OnEngineTick = nullptr};
+    Reloadable reloadable = {
+        false, // IsValid
+        "Kernel.dll", // SharedObjectPath
+        nullptr // OnEngineTick
+    };
 
     if (Engine_Initialize(800, 600, "Engine", &engineEntry) == 0) Engine_Tick(&engineEntry, &reloadable);
 
