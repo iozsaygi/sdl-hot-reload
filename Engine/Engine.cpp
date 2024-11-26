@@ -59,6 +59,9 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
                 case SDL_QUIT:
                     engineEntry->IsRunning = false;
                     break;
+                case SDL_KEYDOWN:
+                    if (event.key.keysym.sym == SDLK_ESCAPE) engineEntry->IsRunning = false;
+                    break;
                 default:;
             }
         }
