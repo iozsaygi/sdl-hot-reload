@@ -29,3 +29,17 @@ int Reloadable_TryLoadingSharedObject(Reloadable* reloadable)
 
     return 0;
 }
+
+void Reloadable_UnloadSharedObject(Reloadable* reloadable)
+{
+    assert(reloadable != nullptr);
+
+    if (reloadable->SharedObjectCode != nullptr)
+    {
+        SDL_UnloadObject(reloadable->SharedObjectCode);
+        reloadable->SharedObjectCode = nullptr;
+    }
+
+    reloadable->IsValid = false;
+    reloadable->OnEngineTick = nullptr;
+}

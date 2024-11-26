@@ -17,5 +17,6 @@ struct Reloadable
 };
 
 int Reloadable_TryLoadingSharedObject(Reloadable* reloadable);
+void Reloadable_UnloadSharedObject(Reloadable* reloadable);
 
 #endif // RELOADABLE_H
