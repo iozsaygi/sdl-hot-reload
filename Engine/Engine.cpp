@@ -62,6 +62,7 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
                 case SDL_KEYDOWN:
                     if (event.key.keysym.sym == SDLK_ESCAPE) engineEntry->IsRunning = false;
                     if (event.key.keysym.sym == SDLK_SPACE) Reloadable_TryLoadingSharedObject(reloadable);
+                    if (event.key.keysym.sym == SDLK_r && reloadable->IsValid) reloadable->OnEngineTick();
                     break;
                 default:;
             }
