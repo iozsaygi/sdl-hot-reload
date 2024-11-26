@@ -11,8 +11,11 @@ struct Reloadable
     // This might differ based on the running platform.
     const char* SharedObjectPath;
 
-    // Function references.
+    // Code references.
+    void* SharedObjectCode;
     Kernel_OnEngineTick OnEngineTick;
 };
+
+int Reloadable_TryLoadingKernelCode(Reloadable* reloadable);
 
 #endif // RELOADABLE_H
