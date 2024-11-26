@@ -16,6 +16,6 @@ struct Reloadable
     Kernel_OnEngineTick OnEngineTick;
 };
 
-int Reloadable_TryLoadingKernelCode(Reloadable* reloadable);
+int Reloadable_TryLoadingSharedObject(Reloadable* reloadable);
 
 #endif // RELOADABLE_H

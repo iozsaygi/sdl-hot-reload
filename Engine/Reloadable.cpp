@@ -3,7 +3,7 @@
 #include <cassert>
 #include "Debugger.h"
 
-int Reloadable_TryLoadingKernelCode(Reloadable* reloadable)
+int Reloadable_TryLoadingSharedObject(Reloadable* reloadable)
 {
     assert(reloadable != nullptr);
 
