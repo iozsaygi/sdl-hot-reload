@@ -26,7 +26,7 @@ string to the console and does nothing fancy at all. Kernel gets compiled as a s
 ```
 mkdir build
 cd build
-CMake -G "Visual Studio 17 2022" ..
+cmake -G "Visual Studio 17 2022" ..
 msbuild Root.sln /p:Configuration=Release
 ```
 
