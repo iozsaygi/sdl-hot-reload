@@ -6,7 +6,6 @@
 int Reloadable_TryLoadingSharedObject(Reloadable* reloadable)
 {
     assert(reloadable != nullptr);
-    // assert(Reloadable_Prepare(reloadable));
 
     reloadable->SharedObjectCode = SDL_LoadObject(reloadable->SharedObjectPath);
 
