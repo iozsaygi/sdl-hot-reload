@@ -9,13 +9,13 @@ to port it to other platforms considering SDL APIs are cross-platform.
 
 ### Windows (MSBuild)
 
-``
+```
 // Building both 'Engine' and 'Kernel' targets.
 mkdir build
 cd build
 CMake -G "Visual Studio 17 2022" ..
 msbuild Root.sln /p:Configuration=Release
-``
+```
 
 ## License
 
