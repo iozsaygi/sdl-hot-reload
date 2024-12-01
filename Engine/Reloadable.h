@@ -11,9 +11,6 @@ struct Reloadable
     // This might differ based on the running platform.
     const char* SharedObjectPath;
 
-    // This is temporary path to copy the shared object whenever reload requested.
-    const char* TemporarySharedObjectPath;
-
     // Code references.
     void* SharedObjectCode;
     Kernel_OnEngineTick OnEngineTick;
