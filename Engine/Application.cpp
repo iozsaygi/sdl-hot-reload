@@ -9,6 +9,7 @@ int main(int argc, char* argv[])
     Reloadable reloadable = {
         false, // IsValid
         "Kernel.dll", // SharedObjectPath
+        "Kernel_Temp.ll", // TemporarySharedObjectPath
         nullptr // OnEngineTick
     };
 
