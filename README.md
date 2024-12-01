@@ -1,10 +1,6 @@
-Work in progress, this file will be updated eventually.
+# SDL Hot Reload
 
-Temporarily writing build steps for Windows (MSVC):
-
-```
-mkdir build
-cd build
-CMake -G "Visual Studio 17 2022" ..
-msbuild Root.sln /p:Configuration=Release
-```
+This repository provides me with an environment to research hot reloading C/C++ code by using useful APIs from the
+open-source [SDL](https://www.libsdl.org/) library. Currently, I was able to make it work in Windows by
+using [MSBuild](https://github.com/dotnet/msbuild). However, it should be easy to
+port it to other platforms considering SDL APIs are cross-platform.
