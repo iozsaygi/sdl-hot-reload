@@ -19,7 +19,6 @@ struct Reloadable
     Kernel_OnEngineTick OnEngineTick;
 };
 
-bool Reloadable_Prepare(const Reloadable* reloadable);
 int Reloadable_TryLoadingSharedObject(Reloadable* reloadable);
 void Reloadable_UnloadSharedObject(Reloadable* reloadable);
 
