@@ -2,7 +2,7 @@
 #define RELOADABLE_H
 
 // Function signatures to call from shared object.
-typedef void (*Kernel_OnEngineTick)();
+typedef void (*Kernel_OnEngineRenderScene)();
 
 struct Reloadable
 {
@@ -13,7 +13,7 @@ struct Reloadable
 
     // Code references.
     void* SharedObjectCode;
-    Kernel_OnEngineTick OnEngineTick;
+    Kernel_OnEngineRenderScene OnEngineRenderScene;
 };
 
 int Reloadable_TryLoadingSharedObject(Reloadable* reloadable);

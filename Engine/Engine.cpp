@@ -60,10 +60,20 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
                     engineEntry->IsRunning = false;
                     break;
                 case SDL_KEYDOWN:
-                    if (event.key.keysym.sym == SDLK_ESCAPE) engineEntry->IsRunning = false;
-                    if (event.key.keysym.sym == SDLK_u) Reloadable_UnloadSharedObject(reloadable);
-                    if (event.key.keysym.sym == SDLK_r) Reloadable_TryLoadingSharedObject(reloadable);
-                    if (event.key.keysym.sym == SDLK_SPACE && reloadable->IsValid) reloadable->OnEngineTick();
+                    switch (event.key.keysym.sym)
+                    {
+                        case SDLK_ESCAPE:
+                            engineEntry->IsRunning = false;
+                            break;
+                        case SDLK_SPACE:
+                            Reloadable_UnloadSharedObject(reloadable);
+                            Reloadable_TryLoadingSharedObject(reloadable);
+                            break;
+                        case SDLK_u:
+                            Reloadable_UnloadSharedObject(reloadable);
+                            break;
+                        default:;
+                    }
                     break;
                 default:;
             }
@@ -72,6 +82,8 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
         // Render scene.
         SDL_SetRenderDrawColor(engineEntry->Renderer, 0, 0, 0, 255);
         SDL_RenderClear(engineEntry->Renderer);
+
+        if (reloadable->IsValid) reloadable->OnEngineRenderScene();
 
         SDL_RenderPresent(engineEntry->Renderer);
     }

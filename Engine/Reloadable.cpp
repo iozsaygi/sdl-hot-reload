@@ -16,10 +16,10 @@ int Reloadable_TryLoadingSharedObject(Reloadable* reloadable)
     }
 
     // ReSharper disable once CppFunctionalStyleCast
-    reloadable->OnEngineTick =
-        Kernel_OnEngineTick(SDL_LoadFunction(reloadable->SharedObjectCode, "Kernel_OnEngineTick"));
+    reloadable->OnEngineRenderScene =
+        Kernel_OnEngineRenderScene(SDL_LoadFunction(reloadable->SharedObjectCode, "Kernel_OnEngineRenderScene"));
 
-    if (reloadable->OnEngineTick == nullptr)
+    if (reloadable->OnEngineRenderScene == nullptr)
     {
         Debugger_Log("Failed to load function from shared object, the reason was: %s", SDL_GetError());
         return -1;
@@ -44,5 +44,5 @@ void Reloadable_UnloadSharedObject(Reloadable* reloadable)
     }
 
     reloadable->IsValid = false;
-    reloadable->OnEngineTick = nullptr;
+    reloadable->OnEngineRenderScene = nullptr;
 }

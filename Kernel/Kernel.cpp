@@ -2,7 +2,7 @@
 
 #include <cstdio>
 
-void Kernel_OnEngineTick()
+void Kernel_OnEngineRenderScene()
 {
-    printf("OnEngineTick\n");
+    printf("OnEngineRenderScene\n");
 }
