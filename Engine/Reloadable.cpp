@@ -26,6 +26,7 @@ int Reloadable_TryLoadingSharedObject(Reloadable* reloadable)
     }
 
     reloadable->IsValid = true;
+    Debugger_Log("Successfully loaded shared object.");
 
     return 0;
 }
@@ -38,6 +39,8 @@ void Reloadable_UnloadSharedObject(Reloadable* reloadable)
     {
         SDL_UnloadObject(reloadable->SharedObjectCode);
         reloadable->SharedObjectCode = nullptr;
+
+        Debugger_Log("Unloaded the shared object instance.");
     }
 
     reloadable->IsValid = false;
