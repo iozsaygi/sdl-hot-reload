@@ -1,8 +1,10 @@
 #ifndef RELOADABLE_H
 #define RELOADABLE_H
 
+#include <SDL.h>
+
 // Function signatures to call from shared object.
-typedef void (*Kernel_OnEngineRenderScene)();
+typedef void (*Kernel_OnEngineRenderScene)(SDL_Renderer* renderer, SDL_Rect rect);
 
 struct Reloadable
 {

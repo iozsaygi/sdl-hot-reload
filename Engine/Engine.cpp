@@ -83,7 +83,18 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
         SDL_SetRenderDrawColor(engineEntry->Renderer, 0, 0, 0, 255);
         SDL_RenderClear(engineEntry->Renderer);
 
-        if (reloadable->IsValid) reloadable->OnEngineRenderScene();
+        // Keeping the memory within engine side to prevent shared object from resetting game state.
+        // Passing required information/data to shared object.
+        if (reloadable->IsValid)
+        {
+            SDL_Rect rect;
+            rect.x = 450;
+            rect.y = 350;
+            rect.w = 100;
+            rect.h = 100;
+
+            reloadable->OnEngineRenderScene(engineEntry->Renderer, rect);
+        }
 
         SDL_RenderPresent(engineEntry->Renderer);
     }
