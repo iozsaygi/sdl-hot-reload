@@ -2,6 +2,7 @@
 #include <cassert>
 #include <cstring>
 #include "Debugger.h"
+#include "Watcher.h"
 
 int Engine_Initialize(const int width, const int height, const char* title, EngineEntry* engineEntry)
 {
@@ -47,6 +48,15 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
     engineEntry->IsRunning = true;
 
     SDL_Event event;
+
+    // Setup empty observable data that will be used during game loop.
+    Observable observable = {
+        "", // Directory to watch on.
+        nullptr // Initial handle object specific to win32.
+    };
+
+    // Initialize the watcher.
+    Watcher_Initialize(&observable);
 
     Debugger_Log("Entering engine main loop.");
     while (engineEntry->IsRunning)
