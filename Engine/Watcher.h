@@ -4,7 +4,7 @@
 #include <windows.h>
 
 // As far as I know, there are no cross-platform APIs provided by SDL that actually listens to directory notifications.
-// Most of the solutions rely on writing code specific the OS we are working on. (Or we can just use third-party library
+// Most of the solutions rely on writing code specific to the OS we are working on. (Or we can just use third-party library
 // just to achieve this.) So a little bit of porting work is required for the watcher.
 
 struct Observable
