@@ -56,7 +56,8 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
     };
 
     // Initialize the watcher.
-    Watcher_Initialize(&observable);
+    // TODO: Enable back when directory path is fixed.
+    // Watcher_Initialize(&observable);
 
     Debugger_Log("Entering engine main loop.");
     while (engineEntry->IsRunning)
@@ -89,6 +90,10 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
             }
         }
 
+        // This is causing crash because our directory path is not valid.
+        // TODO: Enable back when directory path is fixed.
+        // Watcher_WatchForChangesOnDirectory(&observable);
+
         // Render scene.
         SDL_SetRenderDrawColor(engineEntry->Renderer, 0, 0, 0, 255);
         SDL_RenderClear(engineEntry->Renderer);
@@ -109,6 +114,9 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
         SDL_RenderPresent(engineEntry->Renderer);
     }
     Debugger_Log("Finished cycling of engine main loop.");
+
+    // Dispose the watcher.
+    Watcher_Shutdown(&observable);
 }
 
 void Engine_Shutdown(const EngineEntry* engineEntry)
