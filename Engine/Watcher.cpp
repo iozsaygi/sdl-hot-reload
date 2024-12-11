@@ -19,23 +19,3 @@ void Watcher_Initialize(Observable* observable)
         return;
     }
 }
-
-void Watcher_WatchForChangesOnDirectory(Observable* observable)
-{
-    assert(observable != nullptr);
-
-    if (ReadDirectoryChangesW(
-            observable->DirectoryHandle, observable->NotificationBuffer, sizeof(observable->NotificationBuffer), TRUE,
-            FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME | FILE_NOTIFY_CHANGE_ATTRIBUTES |
-                FILE_NOTIFY_CHANGE_SIZE | FILE_NOTIFY_CHANGE_LAST_WRITE,
-            &observable->Result, nullptr, nullptr))
-    {
-        Debugger_Log("Change detected on watched directory!");
-    }
-}
-
-void Watcher_Shutdown(Observable* observable)
-{
-    CloseHandle(observable->DirectoryHandle);
-    observable->DirectoryHandle = INVALID_HANDLE_VALUE;
-}
