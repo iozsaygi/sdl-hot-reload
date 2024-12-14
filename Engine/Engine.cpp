@@ -2,6 +2,7 @@
 #include <cassert>
 #include <cstring>
 #include "Debugger.h"
+#include "Watcher.h"
 
 int Engine_Initialize(const int width, const int height, const char* title, EngineEntry* engineEntry)
 {
@@ -47,6 +48,9 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
     engineEntry->IsRunning = true;
 
     SDL_Event event;
+
+    Win32Observable win32Observable = {};
+    Watcher_Initialize(&win32Observable);
 
     Debugger_Log("Entering engine main loop.");
     while (engineEntry->IsRunning)
@@ -99,6 +103,8 @@ void Engine_Tick(EngineEntry* engineEntry, Reloadable* reloadable)
         SDL_RenderPresent(engineEntry->Renderer);
     }
     Debugger_Log("Finished cycling of engine main loop.");
+
+    Watcher_Shutdown(&win32Observable);
 }
 
 void Engine_Shutdown(const EngineEntry* engineEntry)
