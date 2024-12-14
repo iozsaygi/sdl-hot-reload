@@ -37,7 +37,6 @@ void Watcher_Initialize(Win32Observable* win32Observable)
     // Setup thread to watch for directory changes.
     win32Observable->IsRunning = true;
     win32Observable->WorkerThread = std::thread(Watcher_Observe, win32Observable);
-    win32Observable->WorkerThread.detach();
 }
 
 void Watcher_Observe(const Win32Observable* win32Observable)
@@ -48,25 +47,42 @@ void Watcher_Observe(const Win32Observable* win32Observable)
 
     while (win32Observable->IsRunning)
     {
-        if (ReadDirectoryChangesW(win32Observable->DirectoryHandle, buffer, sizeof(buffer), FALSE,
-                                  FILE_NOTIFY_CHANGE_LAST_WRITE, &bytesReturned, nullptr, nullptr))
+        const BOOL success = ReadDirectoryChangesW(win32Observable->DirectoryHandle, buffer, sizeof(buffer), FALSE,
+                                                   FILE_NOTIFY_CHANGE_LAST_WRITE, &bytesReturned, nullptr, nullptr);
+
+        if (!success)
+        {
+            const DWORD error = GetLastError();
+            if (error == ERROR_OPERATION_ABORTED)
+            {
+                Debugger_Log("Watcher thread was interrupted.");
+                break;
+            }
+
+            Debugger_Log("Error occurred in ReadDirectoryChangesW: %d", error);
+        }
+        else
         {
             Debugger_Log("File change detected!");
         }
 
         // Sleep the thread.
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
+
+    Debugger_Log("Watcher thread stopping.");
 }
 
 void Watcher_Shutdown(Win32Observable* win32Observable)
 {
     win32Observable->IsRunning = false;
 
-    if (win32Observable->WorkerThread.joinable())
+    if (!CancelIoEx(win32Observable->DirectoryHandle, nullptr))
     {
-        win32Observable->WorkerThread.join();
+        Debugger_Log("CancelIoEx failed, the reason was: %d", GetLastError());
     }
+
+    if (win32Observable->WorkerThread.joinable()) win32Observable->WorkerThread.join();
 
     CloseHandle(win32Observable->DirectoryHandle);
     win32Observable->DirectoryHandle = INVALID_HANDLE_VALUE;
