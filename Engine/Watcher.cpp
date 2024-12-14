@@ -54,7 +54,7 @@ void Watcher_Observe(const Win32Observable* win32Observable)
         }
         else
         {
-            Debugger_Log("ReadDirectoryChangesW failed, the reason was: %lu", GetLastError());
+            Debugger_Log("ReadDirectoryChangesW failed, the reason was: %s", GetLastError());
         }
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
