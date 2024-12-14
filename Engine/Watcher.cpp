@@ -47,30 +47,18 @@ void Watcher_Observe(const Win32Observable* win32Observable)
 
     while (win32Observable->IsRunning)
     {
-        const BOOL success = ReadDirectoryChangesW(win32Observable->DirectoryHandle, buffer, sizeof(buffer), FALSE,
-                                                   FILE_NOTIFY_CHANGE_LAST_WRITE, &bytesReturned, nullptr, nullptr);
-
-        if (!success)
+        if (ReadDirectoryChangesW(win32Observable->DirectoryHandle, buffer, sizeof(buffer), FALSE,
+                                  FILE_NOTIFY_CHANGE_LAST_WRITE, &bytesReturned, nullptr, nullptr))
         {
-            const DWORD error = GetLastError();
-            if (error == ERROR_OPERATION_ABORTED)
-            {
-                Debugger_Log("Watcher thread was interrupted.");
-                break;
-            }
-
-            Debugger_Log("Error occurred in ReadDirectoryChangesW: %d", error);
+            Debugger_Log("Change on shared library detected, trying to execute hot reload!");
         }
         else
         {
-            Debugger_Log("File change detected!");
+            Debugger_Log("ReadDirectoryChangesW failed, the reason was: %lu", GetLastError());
         }
 
-        // Sleep the thread.
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-
-    Debugger_Log("Watcher thread stopping.");
 }
 
 void Watcher_Shutdown(Win32Observable* win32Observable)
