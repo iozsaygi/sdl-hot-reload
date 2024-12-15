@@ -67,4 +67,5 @@ void Engine_Update(const struct render_context* rCtx) {
 void Engine_Quit(const struct render_context* rCtx) {
     SDL_DestroyRenderer(rCtx->renderer);
     SDL_DestroyWindow(rCtx->window);
+    SDL_Quit();
 }
