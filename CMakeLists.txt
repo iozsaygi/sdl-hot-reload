@@ -53,7 +53,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif ()
 
 # The 'Engine' project will be compiled as executable and will watch over working directory to detect changes at runtime.
-# add_subdirectory(Engine)
+add_subdirectory(Engine)
 
 # The 'Kernel' project will be compiled as shared library and will contain code related to SDL.
 # add_subdirectory(Kernel)
