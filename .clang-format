@@ -51,7 +51,8 @@ SpaceAfterTemplateKeyword: false
 SpaceBeforeRangeBasedForLoopColon: false
 SpaceInEmptyParentheses: false
 SpacesInAngles: false
-SpacesInConditionalStatement: false
+SpaceBeforeCpp11BracedList: true
+SpacesInContainerLiterals: true
 SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 TabWidth: 4

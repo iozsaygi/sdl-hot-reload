@@ -31,8 +31,45 @@ int Engine_Initialize(const int width, const int height, const char* title, stru
     return 0;
 }
 
-void Engine_Update(const struct render_context* rCtx) {
+int Engine_TryUpdateGameCodeInstance(struct game_code* gc) {
+    assert(gc != nullptr);
+
+    // Remove the existing game code instance before updating.
+    if (gc->instance != nullptr) Engine_FreeGameCodeInstance(gc);
+
+    gc->instance = SDL_LoadObject(gc->path);
+    if (gc->instance == nullptr) {
+        printf("Failed to load game code, the reason was: %s\n", SDL_GetError());
+        return -1;
+    }
+
+    // ReSharper disable once CppFunctionalStyleCast
+    gc->onEngineRenderScene = Game_OnEngineRenderScene(SDL_LoadFunction(gc->instance, "Game_OnEngineRenderScene"));
+    if (gc->onEngineRenderScene == nullptr) {
+        printf("Failed to load game render callback from game code, the reason was: %s\n", SDL_GetError());
+        return -1;
+    }
+
+    gc->isValid = true;
+    printf("Successfully updated the game code instance\n");
+
+    return 0;
+}
+
+void Engine_FreeGameCodeInstance(struct game_code* gc) {
+    assert(gc != nullptr && gc->instance != nullptr);
+
+    SDL_UnloadObject(gc->instance);
+    gc->onEngineRenderScene = nullptr;
+    gc->instance = nullptr;
+    gc->isValid = false;
+
+    printf("Successfully freed the existing game code instance\n");
+}
+
+void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
     assert(rCtx != nullptr);
+    assert(gc != nullptr);
 
     bool active = true;
     SDL_Event event;
@@ -49,6 +86,9 @@ void Engine_Update(const struct render_context* rCtx) {
                         case SDLK_ESCAPE:
                             active = false;
                             break;
+                        case SDLK_SPACE:
+                            Engine_TryUpdateGameCodeInstance(gc);
+                            break;
                         default:;
                     }
                     break;
@@ -59,6 +99,16 @@ void Engine_Update(const struct render_context* rCtx) {
         // Render scene.
         SDL_SetRenderDrawColor(rCtx->renderer, 0, 0, 0, 255);
         SDL_RenderClear(rCtx->renderer);
+
+        if (gc->isValid) {
+            SDL_Rect rect;
+            rect.x = 450;
+            rect.y = 350;
+            rect.w = 100;
+            rect.h = 100;
+
+            gc->onEngineRenderScene(rCtx->renderer, rect);
+        }
 
         SDL_RenderPresent(rCtx->renderer);
     }
