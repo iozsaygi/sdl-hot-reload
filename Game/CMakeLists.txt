@@ -1,6 +1,7 @@
 project(Game)
 
 set(SDL2_DIR "${CMAKE_SOURCE_DIR}/dependencies/SDL/cmake")
+
 find_package(SDL2 REQUIRED)
 
 # Register source files for 'Game' project.
