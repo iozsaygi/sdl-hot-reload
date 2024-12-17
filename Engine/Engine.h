@@ -22,6 +22,9 @@ struct game_code {
 // Will return '0' on success and '-1' on failure.
 int Engine_Initialize(int width, int height, const char* title, struct render_context* rCtx);
 
+// Unfortunately this one is pretty much 'win32' dependent considering it triggers 'msbuild' tool chain under the hood.
+// Porting of this to other platforms or compilers will rely on changing the command that we are passing via system
+// call.
 int Engine_TriggerGameBuild();
 
 // Just like initialization, will return '0' on success.
