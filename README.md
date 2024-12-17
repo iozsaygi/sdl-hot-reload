@@ -1,5 +1,8 @@
 This file will be updated eventually.
 
+## Notes
+- Had to add `msbuild` to environment variables in Windows.
+
 ## Building
 
 ### Windows (MSBuild)

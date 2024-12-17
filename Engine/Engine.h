@@ -22,6 +22,8 @@ struct game_code {
 // Will return '0' on success and '-1' on failure.
 int Engine_Initialize(int width, int height, const char* title, struct render_context* rCtx);
 
+int Engine_TriggerGameBuild();
+
 // Just like initialization, will return '0' on success.
 int Engine_TryUpdateGameCodeInstance(struct game_code* gc);
 

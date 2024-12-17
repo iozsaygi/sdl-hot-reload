@@ -32,11 +32,23 @@ int Engine_Initialize(const int width, const int height, const char* title, stru
     return 0;
 }
 
+int Engine_TriggerGameBuild() {
+    const std::string command = "msbuild \"" GAME_SOLUTION_FILE_PATH "\" /p:Configuration=Release";
+    printf("Executing the game build with following command: %s\n", command.c_str());
+
+    const int result = std::system(command.c_str());
+    if (result != 0) printf("Failed to execute the game build with provided command!\n");
+
+    return result;
+}
+
 int Engine_TryUpdateGameCodeInstance(struct game_code* gc) {
     assert(gc != nullptr);
 
     // Remove the existing game code instance before updating.
     if (gc->instance != nullptr) Engine_FreeGameCodeInstance(gc);
+
+    if (Engine_TriggerGameBuild() != 0) return -1;
 
     gc->instance = SDL_LoadObject(gc->path);
     if (gc->instance == nullptr) {
