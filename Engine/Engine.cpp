@@ -102,9 +102,6 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
                         case SDLK_SPACE:
                             Engine_TryUpdateGameCodeInstance(gc);
                             break;
-                        case SDLK_KP_ENTER:
-                            std::cout << "Solution file path: " << GAME_SOLUTION_FILE_PATH << std::endl;
-                            break;
                         default:;
                     }
                     break;
