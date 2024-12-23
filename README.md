@@ -7,9 +7,7 @@ on cross-platform SDL APIs.
 
 ## Showcase
 
-<p align="center">
-![Changing color at runtime](https://github.com/iozsaygi/sdl-hot-reload/blob/main/Showcase/color-change.gif?raw=true)
-</p>
+![Changing color at runtime](https://github.com/iozsaygi/sdl-hot-reload/blob/main/Showcase/color-change.gif)
 
 ## Idea
 
