@@ -36,3 +36,7 @@ one that just creates a render call for a rectangle.
 - `cd build`
 - `cmake -G "Visual Studio 17 2022" ..`
 - `msbuild Root.sln /p:Configuration=Release`
+
+## License
+
+[MIT License](https://github.com/iozsaygi/sdl-hot-reload/blob/main/LICENSE)
