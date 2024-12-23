@@ -21,3 +21,18 @@ required memory for the game code so the game state won't change between reloads
 
 Game is the actual gameplay code that we are compiling and building as a shared library. Note that it is really a simple
 one that just creates a render call for a rectangle.
+
+## Building
+
+### Windows
+
+- Download and install [Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/community/) with the
+  `Desktop development with C++` workload
+- Ensure that `MSBuild` is added to Windows environment variables
+- Download and install [CMake](https://cmake.org/)
+- `git clone https://github.com/iozsaygi/sdl-hot-reload`
+- `cd` to repository directory
+- `mkdir build`
+- `cd build`
+- `cmake -G "Visual Studio 17 2022" ..
+- `msbuild Root.sln /p:Configuration=Release`
