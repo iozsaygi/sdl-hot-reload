@@ -34,5 +34,5 @@ one that just creates a render call for a rectangle.
 - `cd` to repository directory
 - `mkdir build`
 - `cd build`
-- `cmake -G "Visual Studio 17 2022" ..
+- `cmake -G "Visual Studio 17 2022" ..`
 - `msbuild Root.sln /p:Configuration=Release`
