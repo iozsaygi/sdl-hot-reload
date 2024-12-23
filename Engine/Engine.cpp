@@ -33,7 +33,7 @@ int Engine_Initialize(const int width, const int height, const char* title, stru
 }
 
 int Engine_TriggerGameBuild() {
-    const std::string command = "msbuild \"" GAME_SOLUTION_FILE_PATH "\" /p:Configuration=Release";
+    const std::string command = "msbuild \"" GAME_SOLUTION_FILE_PATH "\" /p:Configuration=Release > NUL 2>&1";
     printf("Executing the game build with following command: %s\n", command.c_str());
 
     const int result = std::system(command.c_str());
