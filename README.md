@@ -5,6 +5,12 @@ library. Supporting cross-platform is currently an issue considering some parts 
 pipeline) rely on Win32-based APIs. However, the core logic that is responsible for managing hot reloading is dependent
 on cross-platform SDL APIs.
 
+## Showcase
+
+<p align="center">
+![Changing color at runtime](https://github.com/iozsaygi/sdl-hot-reload/blob/main/Showcase/color-change.gif?raw=true)
+</p>
+
 ## Idea
 
 Hot reloading approaches to game development in a different context. Enables us to write our gameplay code as shared
