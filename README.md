@@ -41,6 +41,12 @@ one that just creates a render call for a rectangle.
 - `cmake -G "Visual Studio 17 2022" ..`
 - `msbuild Root.sln /p:Configuration=Release`
 
+## Resources
+
+- [Easy Hot-Loading for C](https://slembcke.github.io/HotLoadC)
+- [Hot Reload Gameplay Code: What, why, limitations and examples!](https://zylinski.se/posts/hot-reload-gameplay-code/)
+- [How can one implement hot-swappable C++ modules?](https://gamedev.stackexchange.com/questions/221/how-can-one-implement-hot-swappable-c-modules)
+
 ## License
 
 [MIT License](https://github.com/iozsaygi/sdl-hot-reload/blob/main/LICENSE)
