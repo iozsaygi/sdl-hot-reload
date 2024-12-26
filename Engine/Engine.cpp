@@ -14,8 +14,8 @@ int Engine_Initialize(const int width, const int height, const char* title, stru
         return -1;
     }
 
-    rCtx->window =
-        SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+    rCtx->window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
+                                    SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if (rCtx->window == nullptr) {
         printf("Failed to create SDL window, the reason was: %s\n", SDL_GetError());
         return -1;
