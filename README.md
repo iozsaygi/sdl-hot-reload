@@ -10,7 +10,7 @@ _Here's a small footage where we are hot reloading a basic rendering call:_
 
 The project consists of two different CMake targets: one is `Engine` (built as an executable), and the other is `Game` (
 built as a shared library). Engine is the actual system that manages the instance of game code at runtime, and game is
-just a basic render call that draws a rectangle on the screen. The memory and objects are allocated within the engine's
+just a basic render call that draws a rectangle on the screen. Memory and objects are allocated within the engine's
 scope in order to keep the game state persistent between hot reload calls.
 
 ## Building
