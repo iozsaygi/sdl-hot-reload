@@ -36,6 +36,12 @@ Currently, the hot reloading works as follows:
       the [Engine.cpp](https://github.com/iozsaygi/sdl-hot-reload/blob/main/Engine/Engine.cpp) file
 3. Change the game code and reload it at runtime by repeating step two
 
+## Roadmap
+
+- [ ] Being able to automatically update the live game code instance without needing a trigger from keybind
+- [ ] Hot reloading assets such as textures
+- [ ] Supporting other platforms
+
 ## License
 
 [MIT License](https://github.com/iozsaygi/sdl-hot-reload/blob/main/LICENSE)
