@@ -16,7 +16,7 @@ lacks that feature at the moment, but it is on the roadmap.
 Currently, the hot reloading works as follows:
 
 1. Launch the `Engine` project
-2. Press `ESC` to trigger a new build of game code and reload it while the engine is running
+2. Press `Space` to trigger a new build of game code and reload it while the engine is running
     - Keybind can be changed by visiting
       the [Engine.cpp](https://github.com/iozsaygi/sdl-hot-reload/blob/main/Engine/Engine.cpp) file
 3. Change the game code and reload it at runtime by repeating step two
