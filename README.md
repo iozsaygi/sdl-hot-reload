@@ -22,11 +22,7 @@ scope in order to keep the game state persistent between hot reload calls.
 - Ensure that `MSBuild` is added to Windows environment variables
 - Download and install [CMake](https://cmake.org/)
 - `git clone https://github.com/iozsaygi/sdl-hot-reload`
-- `cd` to repository directory
-- `mkdir build`
-- `cd build`
-- `cmake -G "Visual Studio 17 2022" ..`
-- `msbuild Root.sln /p:Configuration=Release`
+- Run the `win32-build.bat`
 
 ## How does it work?
 
