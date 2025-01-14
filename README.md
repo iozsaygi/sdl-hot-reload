@@ -13,6 +13,9 @@ built as a shared library). Engine is the actual system that manages the instanc
 just a basic render call that draws a rectangle on the screen. Memory and objects are allocated within the engine's
 scope in order to keep the game state persistent between hot reload calls.
 
+I wrote a [blog post](https://iozsaygi.github.io/2025/01/06/hot-reloading-ccpp-code-with-sdl.html) about this recently;
+check it if you want to get a bit more detail.
+
 ## Building
 
 ### Windows
