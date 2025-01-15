@@ -9,7 +9,7 @@ if (WIN32)
 endif ()
 
 # Register source files for 'Engine'.
-add_executable(${PROJECT_NAME} Entry.cpp Engine.cpp)
+add_executable(${PROJECT_NAME} Entry.cpp Engine.cpp Watcher.cpp)
 
 # Add SDL include directory.
 include_directories(${SDL2_INCLUDE_DIR})
