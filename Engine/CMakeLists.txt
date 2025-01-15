@@ -10,7 +10,7 @@ endif ()
 
 # Cache the source code directory of the game, this will help us to observe that specific directory at runtime.
 set(GAME_SOURCE_CODE_DIRECTORY "${CMAKE_SOURCE_DIR}/Game/")
-message(STATUS "[ENGINE] Cached the game source code directory, the value is: ${GAME_SOURCE_CODE_DIRECTORY}")
+message(STATUS "[ENGINE] Cached the game source code directory as: ${GAME_SOURCE_CODE_DIRECTORY}")
 add_compile_definitions(GAME_SOURCE_CODE_DIRECTORY="${GAME_SOURCE_CODE_DIRECTORY}")
 
 # Register source files for 'Engine'.
