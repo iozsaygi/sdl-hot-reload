@@ -8,6 +8,11 @@ if (WIN32)
     add_compile_definitions(GAME_SOLUTION_FILE_PATH="${GAME_SOLUTION_FILE_PATH}")
 endif ()
 
+# Cache the source code directory of the game, this will help us to observe that specific directory at runtime.
+set(GAME_SOURCE_CODE_DIRECTORY "${CMAKE_SOURCE_DIR}/Game/")
+message(STATUS "[ENGINE] Cached the game source code directory, the value is: ${GAME_SOURCE_CODE_DIRECTORY}")
+add_compile_definitions(GAME_SOURCE_CODE_DIRECTORY="${GAME_SOURCE_CODE_DIRECTORY}")
+
 # Register source files for 'Engine'.
 add_executable(${PROJECT_NAME} Entry.cpp Engine.cpp Watcher.cpp)
 
