@@ -3,7 +3,6 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
-#include "Watcher.h"
 
 int Engine_Initialize(const int width, const int height, const char* title, struct render_context* rCtx) {
     assert(width > 0);
@@ -87,10 +86,6 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
 
     bool active = true;
     SDL_Event event;
-
-    watcher_configuration watcherConfiguration = {
-        GAME_SOURCE_CODE_DIRECTORY // directory
-    };
 
     while (active) {
         // Event handling.
