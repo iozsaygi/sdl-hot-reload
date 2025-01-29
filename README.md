@@ -21,11 +21,11 @@ check it if you want to get a bit more detail.
 ### Windows
 
 - Download and install [Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/community/) with the
-  `Desktop development with C++` workload.
-- Ensure that `MSBuild` is added to Windows environment variables.
-- Download and install [CMake](https://cmake.org/).
-- Run `git clone https://github.com/iozsaygi/sdl-hot-reload` command.
-- Run the `win32-build.bat` build script.
+  `Desktop development with C++` workload
+- Ensure that `MSBuild` is added to Windows environment variables
+- Download and install [CMake](https://cmake.org/)
+- `git clone https://github.com/iozsaygi/sdl-hot-reload`
+- Run the `win32-build.bat`
 
 ## How does it work?
 
@@ -34,17 +34,17 @@ lacks that feature at the moment, but it is on the roadmap.
 
 _Currently, the hot reloading works as follows:_
 
-1. Launch the `Engine` executable.
-2. Press `Space` to trigger a new build of game code and reload it while the engine is running.
+1. Launch the `Engine`
+2. Press `Space` to trigger a new build of game code and reload it while the engine is running
     - Keybind can be changed by visiting
-      the [Engine.cpp](https://github.com/iozsaygi/sdl-hot-reload/blob/main/Engine/Engine.cpp) file.
-3. Change the game code and reload it at runtime by repeating step two.
+      the [Engine.cpp](https://github.com/iozsaygi/sdl-hot-reload/blob/main/Engine/Engine.cpp) file
+3. Change the game code and reload it at runtime by repeating step two
 
 ## Roadmap
 
-- [ ] Being able to automatically update the live game code instance without needing a trigger from keybind.
-- [ ] Hot reloading assets such as textures.
-- [ ] Supporting other platforms.
+- [ ] Being able to automatically update the live game code instance without needing a trigger from keybind
+- [ ] Hot reloading assets such as textures
+- [ ] Supporting other platforms
 
 ## License
 
