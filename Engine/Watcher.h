@@ -5,7 +5,7 @@
 #include <thread>
 
 struct win32_watcher {
-    char* directory;
+    const char* directory;
     std::thread thread;
     std::atomic<bool> isRunning;
 };

@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
+#include "Watcher.h"
 
 int Engine_Initialize(const int width, const int height, const char* title, struct render_context* rCtx) {
     assert(width > 0);
@@ -84,6 +85,11 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
     assert(rCtx != nullptr);
     assert(gc != nullptr);
 
+    win32_watcher win32Watcher;
+    win32Watcher.directory = GAME_SOURCE_CODE_DIRECTORY;
+    win32Watcher.thread = std::thread(Watcher_TryCreate, &win32Watcher);
+    win32Watcher.isRunning = true;
+
     bool active = true;
     SDL_Event event;
 
@@ -98,6 +104,7 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
                     switch (event.key.keysym.sym) {
                         case SDLK_ESCAPE:
                             active = false;
+                            win32Watcher.isRunning = false;
                             break;
                         case SDLK_SPACE:
                             Engine_TryUpdateGameCodeInstance(gc);
