@@ -85,10 +85,9 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
     assert(rCtx != nullptr);
     assert(gc != nullptr);
 
-    win32_watcher win32Watcher;
-    win32Watcher.directory = GAME_SOURCE_CODE_DIRECTORY;
-    win32Watcher.thread = std::thread(Watcher_TryCreate, &win32Watcher);
+    win32_watcher win32Watcher(GAME_SOURCE_CODE_DIRECTORY, Engine_TryUpdateGameCodeInstance);
     win32Watcher.isRunning = true;
+    win32Watcher.thread = std::thread(Watcher_TryCreate, &win32Watcher, gc);
 
     bool active = true;
     SDL_Event event;

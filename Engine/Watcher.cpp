@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <windows.h>
 
-int Watcher_TryCreate(const struct win32_watcher* win32Watcher) {
+int Watcher_TryCreate(const struct win32_watcher* win32Watcher, struct game_code* gc) {
     const auto lpcwstr = new wchar_t[4096];
     MultiByteToWideChar(CP_ACP, 0, win32Watcher->directory, -1, lpcwstr, 4096);
 
@@ -26,7 +26,7 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher) {
         if (ReadDirectoryChangesW(handle, notificationBuffer, sizeof(notificationBuffer), TRUE,
                                   FILE_NOTIFY_CHANGE_LAST_WRITE, &returnBuffer, nullptr, nullptr)) {
             printf("File modification detected, executing assigned callback\n");
-            win32Watcher->callback();
+            win32Watcher->callback(gc);
         }
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
