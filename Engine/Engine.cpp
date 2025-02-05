@@ -46,6 +46,8 @@ int Engine_TriggerGameBuild() {
 int Engine_TryUpdateGameCodeInstance(struct game_code* gc) {
     assert(gc != nullptr);
 
+    gc->isValid = false;
+
     // Remove the existing game code instance before updating.
     if (gc->instance != nullptr) Engine_FreeGameCodeInstance(gc);
 

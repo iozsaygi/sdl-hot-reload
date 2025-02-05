@@ -20,16 +20,32 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher, struct game_code
 
     DWORD returnBuffer;
 
+    auto lastCapturedSystemTime = std::chrono::steady_clock::now();
+    const int changeRegistrationInterval = 5;
+
     printf("Watcher created and entering the observation loop at %ls\n", lpcwstr);
 
     while (win32Watcher->isRunning) {
         if (ReadDirectoryChangesW(handle, notificationBuffer, sizeof(notificationBuffer), TRUE,
                                   FILE_NOTIFY_CHANGE_LAST_WRITE, &returnBuffer, nullptr, nullptr)) {
-            printf("File modification detected, executing assigned callback\n");
-            try {
-                win32Watcher->callback(gc);
-            } catch (const std::exception& exception) {
-                printf("Exception occurred while executing callback, the reason was: %s\n", exception.what());
+
+            // Get the system time at the place where notification occurred.
+            auto currentSystemTime = std::chrono::steady_clock::now();
+
+            // Calculate the elapsed time in seconds between captured and current system time.
+            auto elapsedSeconds =
+                std::chrono::duration_cast<std::chrono::seconds>(currentSystemTime - lastCapturedSystemTime);
+
+            // Only register notification if required seconds passed.
+            if (elapsedSeconds.count() >= changeRegistrationInterval) {
+                printf("File modification detected, executing assigned callback\n");
+                lastCapturedSystemTime = currentSystemTime;
+
+                try {
+                    win32Watcher->callback(gc);
+                } catch (const std::exception& exception) {
+                    printf("Exception occurred while executing callback, the reason was: %s\n", exception.what());
+                }
             }
         }
 
