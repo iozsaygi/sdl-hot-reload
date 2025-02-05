@@ -2,11 +2,13 @@
 #define WATCHER_H
 
 #include <atomic>
+#include <functional>
 #include <thread>
 
 struct win32_watcher {
     const char* directory;
     std::thread thread;
+    std::function<void()> callback;
     std::atomic<bool> isRunning;
 };
 
