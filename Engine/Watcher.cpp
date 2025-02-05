@@ -20,12 +20,12 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher) {
 
     DWORD returnBuffer;
 
-    printf("Watcher created and entering the observation loop\n");
+    printf("Watcher created and entering the observation loop at %ls\n", lpcwstr);
 
     while (win32Watcher->isRunning) {
         if (ReadDirectoryChangesW(handle, notificationBuffer, sizeof(notificationBuffer), TRUE,
                                   FILE_NOTIFY_CHANGE_LAST_WRITE, &returnBuffer, nullptr, nullptr)) {
-            printf("File modification detected!");
+            printf("File modification detected!\n");
         }
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
