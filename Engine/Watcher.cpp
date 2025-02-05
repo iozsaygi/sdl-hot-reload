@@ -26,7 +26,11 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher, struct game_code
         if (ReadDirectoryChangesW(handle, notificationBuffer, sizeof(notificationBuffer), TRUE,
                                   FILE_NOTIFY_CHANGE_LAST_WRITE, &returnBuffer, nullptr, nullptr)) {
             printf("File modification detected, executing assigned callback\n");
-            win32Watcher->callback(gc);
+            try {
+                win32Watcher->callback(gc);
+            } catch (const std::exception& exception) {
+                printf("Exception occurred while executing callback, the reason was: %s\n", exception.what());
+            }
         }
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -35,7 +39,7 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher, struct game_code
     printf("Finished observation loop for watcher\n");
 
     CloseHandle(handle);
-    delete lpcwstr;
+    delete[] lpcwstr;
 
     return 0;
 }
