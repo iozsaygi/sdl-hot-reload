@@ -29,11 +29,10 @@ check it if you want to get a bit more detail.
 
 ## How does it work?
 
-1. Launch the `Engine`
-2. Press `Space` to trigger a new build of game code and reload it while the engine is running
-    - Keybind can be changed by visiting
-      the [Engine.cpp](https://github.com/iozsaygi/sdl-hot-reload/blob/main/Engine/Engine.cpp) file
-3. Change the game code and reload it at runtime by repeating step two
+1. Launch the `Engine` executable
+2. Edit [Game.cpp](https://github.com/iozsaygi/sdl-hot-reload/blob/main/Game/Game.cpp), and it will automatically
+   trigger hot reload in the background
+3. Press `Space` to manually trigger hot reload (Optional)
 
 ## Roadmap
 
