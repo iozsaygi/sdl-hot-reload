@@ -29,11 +29,6 @@ check it if you want to get a bit more detail.
 
 ## How does it work?
 
-One of the core aspects of hot reloading is being able to detect changes made to files. Unfortunately, this project
-lacks that feature at the moment, but it is on the roadmap.
-
-_Currently, the hot reloading works as follows:_
-
 1. Launch the `Engine`
 2. Press `Space` to trigger a new build of game code and reload it while the engine is running
     - Keybind can be changed by visiting
@@ -42,7 +37,7 @@ _Currently, the hot reloading works as follows:_
 
 ## Roadmap
 
-- [ ] Being able to automatically update the live game code instance without needing a trigger from keybind
+- [x] Being able to automatically update the live game code instance without needing a trigger from keybind
 - [ ] Hot reloading assets such as textures
 - [ ] Supporting other platforms
 
