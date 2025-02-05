@@ -1,5 +1,4 @@
 #include "Watcher.h"
-
 #include <cstdio>
 #include <windows.h>
 
@@ -21,6 +20,8 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher) {
 
     DWORD returnBuffer;
 
+    printf("Watcher created and entering the observation loop\n");
+
     while (win32Watcher->isRunning) {
         if (ReadDirectoryChangesW(handle, notificationBuffer, sizeof(notificationBuffer), TRUE,
                                   FILE_NOTIFY_CHANGE_LAST_WRITE, &returnBuffer, nullptr, nullptr)) {
@@ -29,6 +30,8 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher) {
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
+
+    printf("Finished observation loop for watcher\n");
 
     CloseHandle(handle);
     delete lpcwstr;
