@@ -46,6 +46,8 @@ int Engine_TriggerGameBuild() {
 int Engine_TryUpdateGameCodeInstance(struct game_code* gc) {
     assert(gc != nullptr);
 
+    // We are already setting this to 'false' inside 'Engine_FreeGameCodeInstance(game_code*)' but it leads to crashes.
+    // So if we decide the update the game code instance, let's directly set it to invalid before anything else.
     gc->isValid = false;
 
     // Remove the existing game code instance before updating.
