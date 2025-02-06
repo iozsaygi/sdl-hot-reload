@@ -35,10 +35,10 @@ int Engine_Initialize(const int width, const int height, const char* title, stru
 
 int Engine_TriggerGameBuild() {
     const std::string command = "msbuild \"" GAME_SOLUTION_FILE_PATH "\" /p:Configuration=Release > NUL 2>&1";
-    printf("Executing the game build with following command: %s\n", command.c_str());
+    printf("\nExecuting the game build with following command: %s\n", command.c_str());
 
     const int result = std::system(command.c_str());
-    if (result != 0) printf("Failed to execute the game build with provided command!\n");
+    if (result != 0) printf("\nFailed to execute the game build with provided command!\n");
 
     return result;
 }
@@ -57,19 +57,19 @@ int Engine_TryUpdateGameCodeInstance(struct game_code* gc) {
 
     gc->instance = SDL_LoadObject(gc->path);
     if (gc->instance == nullptr) {
-        printf("Failed to load game code, the reason was: %s\n", SDL_GetError());
+        printf("\nFailed to load game code, the reason was: %s\n", SDL_GetError());
         return -1;
     }
 
     // ReSharper disable once CppFunctionalStyleCast
     gc->onEngineRenderScene = Game_OnEngineRenderScene(SDL_LoadFunction(gc->instance, "Game_OnEngineRenderScene"));
     if (gc->onEngineRenderScene == nullptr) {
-        printf("Failed to load game render callback from game code, the reason was: %s\n", SDL_GetError());
+        printf("\nFailed to load game render callback from game code, the reason was: %s\n", SDL_GetError());
         return -1;
     }
 
     gc->isValid = true;
-    printf("Successfully updated the game code instance\n");
+    printf("\nSuccessfully updated the game code instance\n");
 
     return 0;
 }
