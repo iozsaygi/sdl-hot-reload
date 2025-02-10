@@ -21,6 +21,8 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher, struct game_code
     DWORD returnBuffer;
 
     auto lastCapturedSystemTime = std::chrono::steady_clock::now();
+    // ReSharper disable once CppTooWideScope
+    // ReSharper disable once CppVariableCanBeMadeConstexpr
     const int changeRegistrationInterval = 5;
 
     printf("Watcher created and entering the observation loop at %ls\n", lpcwstr);
