@@ -17,7 +17,7 @@ add_compile_definitions(GAME_SOURCE_CODE_DIRECTORY="${GAME_SOURCE_CODE_DIRECTORY
 add_executable(${PROJECT_NAME} Entry.cpp Engine.cpp Watcher.cpp)
 
 # Add SDL include directory.
-include_directories(${SDL2_INCLUDE_DIR})
+include_directories(${SDL3_INCLUDE_DIR})
 
 # Link the SDL library.
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL3_LIBRARIES})

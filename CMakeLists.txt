@@ -1,6 +1,6 @@
 # Configure general properties.
 cmake_minimum_required(VERSION 3.30)
-project(Root)
+project(SDLHotReload)
 
 # Set the 'CPP' standard.
 set(CMAKE_CXX_STANDARD 11)
@@ -27,13 +27,13 @@ if (WIN32)
 
     include(FetchContent)
 
-    set(SDL2_DIR "${CMAKE_SOURCE_DIR}/dependencies/SDL/cmake")
+    set(SDL3_DIR "${CMAKE_SOURCE_DIR}/dependencies/SDL")
 
     # Set the download URL for SDL library.
-    set(SDL_DOWNLOAD_URL "https://github.com/libsdl-org/SDL/releases/download/release-2.30.9/SDL2-devel-2.30.9-VC.zip")
+    set(SDL_DOWNLOAD_URL "https://github.com/libsdl-org/SDL/releases/download/release-3.2.8/SDL3-devel-3.2.8-VC.zip")
 
     # Set the extract directory for downloaded SDL library.
-    set(SDL_EXTRACTION_DIRECTORY "${CMAKE_SOURCE_DIR}/dependencies/SDL")
+    set(SDL_EXTRACTION_DIRECTORY "${SDL3_DIR}")
 
     # Download and extract SDL library.
     message(STATUS "Trying to download and extract SDL library.")
@@ -41,7 +41,12 @@ if (WIN32)
     FetchContent_Declare(SDL URL ${SDL_DOWNLOAD_URL} SOURCE_DIR ${SDL_EXTRACTION_DIRECTORY} DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
     FetchContent_MakeAvailable(SDL)
 
-    find_package(SDL2 REQUIRED)
+    find_package(SDL3 REQUIRED PATHS ${SDL3_DIR}/cmake NO_DEFAULT_PATH)
+endif ()
+
+# Ensure SDL3 is available.
+if (NOT SDL3_FOUND)
+    message(FATAL_ERROR "Couldn't find SDL3!")
 endif ()
 
 # 'MSVC' related commands.

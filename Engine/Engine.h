@@ -1,11 +1,11 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 // The signature of game code that we will be loading from shared library and call within the engine's render loop.
 // This can be expanded with other functions that we would like to hot reload.
-typedef void (*Game_OnEngineRenderScene)(SDL_Renderer* renderer, SDL_Rect rect);
+typedef void (*Game_OnEngineRenderScene)(SDL_Renderer* renderer, SDL_FRect rect);
 
 struct render_context {
     SDL_Window* window;
@@ -15,7 +15,11 @@ struct render_context {
 struct game_code {
     bool isValid;
     const char* path;
-    void* instance;
+
+    // So we were using 'void*' here but with SDL3, we have access to 'SDL_SharedObject*' type.
+    // Check out: https://wiki.libsdl.org/SDL3/SDL_SharedObject
+    SDL_SharedObject* instance;
+
     Game_OnEngineRenderScene onEngineRenderScene;
 };
 

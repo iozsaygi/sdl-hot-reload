@@ -10,19 +10,18 @@ int Engine_Initialize(const int width, const int height, const char* title, stru
     assert(height > 0);
     assert(title != nullptr && strlen(title) > 0);
 
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+    if (SDL_Init(SDL_INIT_VIDEO) == false) {
         printf("Failed to initialize SDL, the reason was: %s\n", SDL_GetError());
         return -1;
     }
 
-    rCtx->window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
-                                    SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    rCtx->window = SDL_CreateWindow(title, width, height, 0);
     if (rCtx->window == nullptr) {
         printf("Failed to create SDL window, the reason was: %s\n", SDL_GetError());
         return -1;
     }
 
-    rCtx->renderer = SDL_CreateRenderer(rCtx->window, -1, 0);
+    rCtx->renderer = SDL_CreateRenderer(rCtx->window, nullptr);
     if (rCtx->renderer == nullptr) {
         printf("Failed to create SDL renderer, the reason was: %s\n", SDL_GetError());
         return -1;
@@ -100,11 +99,11 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
         // Event handling.
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
-                case SDL_QUIT:
+                case SDL_EVENT_QUIT:
                     active = false;
                     break;
-                case SDL_KEYDOWN:
-                    switch (event.key.keysym.sym) {
+                case SDL_EVENT_KEY_DOWN:
+                    switch (event.key.key) {
                         case SDLK_ESCAPE:
                             active = false;
                             win32Watcher.isRunning = false;
@@ -124,7 +123,7 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
         SDL_RenderClear(rCtx->renderer);
 
         if (gc->isValid) {
-            SDL_Rect rect;
+            SDL_FRect rect;
             rect.x = 450;
             rect.y = 350;
             rect.w = 100;
