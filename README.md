@@ -8,7 +8,8 @@ _Here's a small footage where we are hot reloading a basic rendering call:_
 
 ![Render call change](https://github.com/iozsaygi/sdl-hot-reload/blob/main/Showcase/render-call-change.gif)
 
-The project consists of two different CMake targets: one is `Engine` (built as an executable), and the other is `Game` (built as a shared library). Engine is the actual system that manages the instance of game code at runtime, and game is
+The project consists of two different CMake targets: one is `Engine` (built as an executable), and the other is `Game` (
+built as a shared library). Engine is the actual system that manages the instance of game code at runtime, and game is
 just a basic render call that draws a rectangle on the screen. Memory and objects are allocated within the engine's
 scope in order to keep the game state persistent between hot reload calls.
 
@@ -26,6 +27,15 @@ check it if you want to get a bit more detail.
 - `git clone https://github.com/iozsaygi/sdl-hot-reload`
 - Run the `win32-build.bat`
 
+### macOS
+
+#### Through Homebrew
+
+- `git clone https://github.com/iozsaygi/sdl-hot-reload`
+- `brew install cmake`
+- `chmod +x build.sh`
+- `./build.sh`
+
 ## How does it work?
 
 1. Launch the `Engine` executable
@@ -37,7 +47,8 @@ check it if you want to get a bit more detail.
 
 - [x] Being able to automatically update the live game code instance without needing a trigger from keybind
 - [ ] Hot reloading assets such as textures
-- [ ] Supporting other platforms
+- [x] Supporting other platforms
+    - As of May 6th, 2025, the entire system is now ported to macOS.
 
 ## License
 
