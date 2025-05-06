@@ -1,8 +1,12 @@
 #include "Watcher.h"
 #include <cstdio>
+
+#ifdef SDL_HOT_RELOAD_WIN32
 #include <windows.h>
+#endif // SDL_HOT_RELOAD_WIN32
 
 int Watcher_TryCreate(const struct win32_watcher* win32Watcher, struct game_code* gc) {
+#ifdef SDL_HOT_RELOAD_WIN32
     const auto lpcwstr = new wchar_t[4096];
     MultiByteToWideChar(CP_ACP, 0, win32Watcher->directory, -1, lpcwstr, 4096);
 
@@ -60,4 +64,7 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher, struct game_code
     delete[] lpcwstr;
 
     return 0;
+#else
+    return -1;
+#endif // SDL_HOT_RELOAD_WIN32
 }

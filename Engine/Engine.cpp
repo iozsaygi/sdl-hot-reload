@@ -33,6 +33,7 @@ int Engine_Initialize(const int width, const int height, const char* title, stru
 }
 
 int Engine_TriggerGameBuild() {
+#ifdef SDL_HOT_RELOAD_WIN32
     const std::string command = "msbuild \"" GAME_SOLUTION_FILE_PATH "\" /p:Configuration=Release > NUL 2>&1";
     printf("\nExecuting the game build with following command: %s\n", command.c_str());
 
@@ -40,6 +41,9 @@ int Engine_TriggerGameBuild() {
     if (result != 0) printf("\nFailed to execute the game build with provided command!\n");
 
     return result;
+#else
+    return -1;
+#endif // SDL_HOT_RELOAD_WIN32
 }
 
 int Engine_TryUpdateGameCodeInstance(struct game_code* gc) {

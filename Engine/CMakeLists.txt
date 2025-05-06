@@ -6,6 +6,7 @@ if (WIN32)
     set(GAME_SOLUTION_FILE_PATH "${CMAKE_SOURCE_DIR}/build/Game/Game.sln")
     message(STATUS "[ENGINE] Cached the '.sln' file path of 'Game' project: ${GAME_SOLUTION_FILE_PATH}")
     add_compile_definitions(GAME_SOLUTION_FILE_PATH="${GAME_SOLUTION_FILE_PATH}")
+    add_compile_definitions(SDL_HOT_RELOAD_WIN32)
 endif ()
 
 # Cache the source code directory of the game, this will help us to observe that specific directory at runtime.
