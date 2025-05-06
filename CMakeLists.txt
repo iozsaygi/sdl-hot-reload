@@ -21,6 +21,10 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
     message(FATAL_ERROR "In-source builds are not allowed, please create a 'build' directory to trigger CMake build.")
 endif ()
 
+set(PROJECT_BUILD_DIRECTORY "${CMAKE_SOURCE_DIR}/build")
+message(STATUS "[ROOT] Cached the root build directory: ${PROJECT_BUILD_DIRECTORY}")
+add_compile_definitions(PROJECT_BUILD_DIRECTORY="${PROJECT_BUILD_DIRECTORY}")
+
 # Only downloading and extracting SDL for Windows.
 if (WIN32)
     message(STATUS "Executing Windows specific build operations.")

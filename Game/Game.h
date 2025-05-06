@@ -8,7 +8,7 @@
 #ifdef SDL_HOT_RELOAD_WIN32
 extern "C" __declspec(dllexport) void Game_OnEngineRenderScene(SDL_Renderer* renderer, SDL_FRect rect);
 #elif __APPLE__
-__attribute__((visibility("default"))) void Game_OnEngineRenderScene(SDL_Renderer* renderer, SDL_FRect rect);
+extern "C" __attribute__((visibility("default"))) void Game_OnEngineRenderScene(SDL_Renderer* renderer, SDL_FRect rect);
 #else
 #error "Failed to define exporting API for shared library on current platform!"
 #endif // SDL_HOT_RELOAD_WIN32

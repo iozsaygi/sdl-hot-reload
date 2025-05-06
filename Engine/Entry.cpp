@@ -1,6 +1,4 @@
 #include <iostream>
-
-
 #include "Engine.h"
 
 int main(int argc, char* argv[]) {
@@ -11,7 +9,11 @@ int main(int argc, char* argv[]) {
 
     struct game_code gc {
         false, // isValid
-        "Game.dll", // path
+#ifdef SDL_HOT_RELOAD_WIN32
+        "Game.dll", // win32 path
+#elif __APPLE__
+        "Game.dylib", // macOS path
+#endif
         nullptr, // instance
         nullptr // onEngineRenderScene
     };

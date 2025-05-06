@@ -41,6 +41,15 @@ int Engine_TriggerGameBuild() {
     if (result != 0) printf("\nFailed to execute the game build with provided command!\n");
 
     return result;
+#elif __APPLE__
+    const std::string buildDirectory = PROJECT_BUILD_DIRECTORY;
+    const std::string command = "cd " + buildDirectory + " && cmake --build . --target Game --config Release";
+
+    printf("\nExecuting CMake build command:\n%s\n", command.c_str());
+    int result = std::system(command.c_str());
+    if (result != 0) printf("\nFailed to execute the game build with provided command!\n");
+
+    return result;
 #else
     return -1;
 #endif // SDL_HOT_RELOAD_WIN32
