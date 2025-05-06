@@ -101,9 +101,9 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
     assert(rCtx != nullptr);
     assert(gc != nullptr);
 
-    win32_watcher win32Watcher(GAME_SOURCE_CODE_DIRECTORY, Engine_TryUpdateGameCodeInstance);
-    win32Watcher.isRunning = true;
-    win32Watcher.thread = std::thread(Watcher_TryCreate, &win32Watcher, gc);
+    struct watcher watcher(GAME_SOURCE_CODE_DIRECTORY, Engine_TryUpdateGameCodeInstance);
+    watcher.isRunning = true;
+    watcher.thread = std::thread(Watcher_TryCreate, &watcher, gc);
 
     bool active = true;
     SDL_Event event;
@@ -119,7 +119,7 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
                     switch (event.key.key) {
                         case SDLK_ESCAPE:
                             active = false;
-                            win32Watcher.isRunning = false;
+                            watcher.isRunning = false;
                             break;
                         case SDLK_SPACE:
                             Engine_TryUpdateGameCodeInstance(gc);

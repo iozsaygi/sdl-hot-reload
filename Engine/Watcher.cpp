@@ -5,10 +5,10 @@
 #include <windows.h>
 #endif // SDL_HOT_RELOAD_WIN32
 
-int Watcher_TryCreate(const struct win32_watcher* win32Watcher, struct game_code* gc) {
+int Watcher_TryCreate(const struct watcher* watcher, struct game_code* gc) {
 #ifdef SDL_HOT_RELOAD_WIN32
     const auto lpcwstr = new wchar_t[4096];
-    MultiByteToWideChar(CP_ACP, 0, win32Watcher->directory, -1, lpcwstr, 4096);
+    MultiByteToWideChar(CP_ACP, 0, watcher->directory, -1, lpcwstr, 4096);
 
     const HANDLE handle =
         CreateFileW(lpcwstr, FILE_LIST_DIRECTORY, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, nullptr,
@@ -31,7 +31,7 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher, struct game_code
 
     printf("Watcher created and entering the observation loop at %ls\n", lpcwstr);
 
-    while (win32Watcher->isRunning) {
+    while (watcher->isRunning) {
         if (ReadDirectoryChangesW(handle, notificationBuffer, sizeof(notificationBuffer), TRUE,
                                   FILE_NOTIFY_CHANGE_LAST_WRITE, &returnBuffer, nullptr, nullptr)) {
 
@@ -48,7 +48,7 @@ int Watcher_TryCreate(const struct win32_watcher* win32Watcher, struct game_code
                 lastCapturedSystemTime = currentSystemTime;
 
                 try {
-                    win32Watcher->callback(gc);
+                    watcher->callback(gc);
                 } catch (const std::exception& exception) {
                     printf("Exception occurred while executing callback, the reason was: %s\n", exception.what());
                 }
