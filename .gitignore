@@ -36,3 +36,6 @@
 build
 cmake-build-debug
 dependencies
+
+# macOS related files
+.DS_Store
