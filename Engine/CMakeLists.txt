@@ -16,8 +16,17 @@ add_compile_definitions(GAME_SOURCE_CODE_DIRECTORY="${GAME_SOURCE_CODE_DIRECTORY
 # Register source files for 'Engine'.
 add_executable(${PROJECT_NAME} Entry.cpp Engine.cpp Watcher.cpp)
 
-# Add SDL include directory.
-include_directories(${SDL3_INCLUDE_DIR})
-
 # Link the SDL library.
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL3_LIBRARIES})
+if (WIN32)
+    message(STATUS "Binding dependencies for Windows.")
+
+    # Add SDL3 include directories.
+    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL3_INCLUDE_DIRS})
+
+    # Link SDL3 library to executable.
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL3_LIBRARIES})
+elseif (APPLE)
+    message(STATUS "Binding dependencies for macOS.")
+
+    target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
+endif ()
