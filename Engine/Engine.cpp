@@ -3,7 +3,14 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
+#include "AssetObserver.h"
 #include "Watcher.h"
+
+#ifdef __APPLE__
+#include <climits>
+#include <mach-o/dyld.h>
+#include <unistd.h>
+#endif // __APPLE__
 
 int Engine_Initialize(const int width, const int height, const char* title, struct render_context* rCtx) {
     assert(width > 0);
@@ -28,6 +35,26 @@ int Engine_Initialize(const int width, const int height, const char* title, stru
     }
 
     SDL_SetWindowTitle(rCtx->window, title);
+
+    // Set the current working directory to the path of the executable on macOS.
+    // TODO: See if we need to handle this for other platforms.
+#ifdef __APPLE__
+    char executablePath[PATH_MAX];
+    uint32_t size = sizeof(executablePath);
+    if (_NSGetExecutablePath(executablePath, &size) == 0) {
+        char resolvedPath[PATH_MAX];
+        if (realpath(executablePath, resolvedPath) != nullptr) {
+            const std::string fullPath(resolvedPath);
+            const std::string directory = fullPath.substr(0, fullPath.find_last_of('/'));
+            chdir(directory.c_str());
+
+            char buffer[PATH_MAX];
+            if (getcwd(buffer, sizeof(buffer)) != nullptr) {
+                printf("Current working directory is: %s\n", buffer);
+            }
+        }
+    }
+#endif // __APPLE__
 
     return 0;
 }
@@ -101,9 +128,11 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
     assert(rCtx != nullptr);
     assert(gc != nullptr);
 
+    AssetObserver assetObserver("Player.png");
+
     struct watcher watcher(GAME_SOURCE_CODE_DIRECTORY, Engine_TryUpdateGameCodeInstance);
     watcher.isRunning = true;
-    watcher.thread = std::thread(Watcher_TryCreate, &watcher, gc);
+    watcher.thread = std::thread(Watcher_TryCreate, &watcher, gc, &assetObserver);
 
     bool active = true;
     SDL_Event event;

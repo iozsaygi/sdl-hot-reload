@@ -4,6 +4,7 @@
 #include <atomic>
 #include <functional>
 #include <thread>
+#include "AssetObserver.h"
 
 struct watcher {
     const char* directory;
@@ -16,6 +17,6 @@ struct watcher {
     }
 };
 
-int Watcher_TryCreate(const struct watcher* watcher, struct game_code* gc);
+int Watcher_TryCreate(const struct watcher* watcher, struct game_code* gc, AssetObserver* assetObserver);
 
 #endif // WATCHER_H

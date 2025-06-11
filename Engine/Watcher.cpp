@@ -11,7 +11,7 @@
 #include <windows.h>
 #endif // SDL_HOT_RELOAD_WIN32
 
-int Watcher_TryCreate(const struct watcher* watcher, struct game_code* gc) {
+int Watcher_TryCreate(const struct watcher* watcher, struct game_code* gc, AssetObserver* assetObserver) {
 #ifdef SDL_HOT_RELOAD_WIN32
     const auto lpcwstr = new wchar_t[4096];
     MultiByteToWideChar(CP_ACP, 0, watcher->directory, -1, lpcwstr, 4096);
@@ -114,8 +114,11 @@ int Watcher_TryCreate(const struct watcher* watcher, struct game_code* gc) {
 
                     try {
                         watcher->callback(gc);
+                        if (assetObserver->HasChanged()) {
+                            printf("Asset observer detect a change on the asset: %s\n", assetObserver->Path);
+                        }
                     } catch (const std::exception& ex) {
-                        printf("Exception occurred while executing callback: %s\n", ex.what());
+                        printf("Exception occurred while executing callback(s): %s\n", ex.what());
                     }
                 }
             }
