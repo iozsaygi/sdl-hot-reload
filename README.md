@@ -46,7 +46,7 @@ check it if you want to get a bit more detail.
 ## Roadmap
 
 - [x] Being able to automatically update the live game code instance without needing a trigger from keybind
-- [ ] Hot reloading assets such as textures
+- [x] Hot reloading assets such as textures
 - [x] Supporting other platforms
     - As of May 6th, 2025, the entire system is now ported to macOS.
 

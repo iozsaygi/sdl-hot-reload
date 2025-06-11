@@ -116,6 +116,7 @@ int Watcher_TryCreate(const struct watcher* watcher, struct game_code* gc, Asset
                         watcher->callback(gc);
                         if (assetObserver->HasChanged()) {
                             printf("Asset observer detect a change on the asset: %s\n", assetObserver->Path);
+                            assetObserver->LoadAsset();
                         }
                     } catch (const std::exception& ex) {
                         printf("Exception occurred while executing callback(s): %s\n", ex.what());

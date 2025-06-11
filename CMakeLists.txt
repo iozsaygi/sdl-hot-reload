@@ -51,7 +51,11 @@ elseif (APPLE)
     include(FetchContent)
     set(SDL_TARGET_REVISION 877399b2b2cf21e67554ed9046410f268ce1d1b2)
     FetchContent_Declare(SDL GIT_REPOSITORY https://github.com/libsdl-org/SDL.git GIT_TAG ${SDL_TARGET_REVISION} GIT_SHALLOW TRUE)
-    FetchContent_MakeAvailable(SDL)
+
+    # Download and extract SDL image by using specific revision.
+    set(SDL_IMAGE_REVISION 11154afb7855293159588b245b446a4ef09e574f)
+    FetchContent_Declare(SDL_image GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git GIT_TAG ${SDL_IMAGE_REVISION} GIT_SHALLOW TRUE)
+    FetchContent_MakeAvailable(SDL SDL_image)
 endif ()
 
 # Ensure SDL3 is available.

@@ -29,5 +29,5 @@ if (WIN32)
 elseif (APPLE)
     message(STATUS "Binding dependencies for macOS.")
 
-    target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
+    target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3 SDL3_image::SDL3_image)
 endif ()

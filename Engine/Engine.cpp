@@ -128,7 +128,7 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
     assert(rCtx != nullptr);
     assert(gc != nullptr);
 
-    AssetObserver assetObserver("Player.png");
+    AssetObserver assetObserver("Player.png", rCtx->renderer);
 
     struct watcher watcher(GAME_SOURCE_CODE_DIRECTORY, Engine_TryUpdateGameCodeInstance);
     watcher.isRunning = true;
@@ -153,6 +153,9 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
                         case SDLK_SPACE:
                             Engine_TryUpdateGameCodeInstance(gc);
                             break;
+                    case SDLK_A:
+                            assetObserver.LoadAsset();
+                            break;
                         default:;
                     }
                     break;
@@ -172,6 +175,17 @@ void Engine_Update(const struct render_context* rCtx, struct game_code* gc) {
             rect.h = 100;
 
             gc->onEngineRenderScene(rCtx->renderer, rect);
+        }
+
+        // Render the hooked texture if it is valid.
+        if (assetObserver.Texture != nullptr) {
+            SDL_FRect rect;
+            rect.x = 100;
+            rect.y = 150;
+            rect.w = 32;
+            rect.h = 32;
+
+            SDL_RenderTexture(rCtx->renderer, assetObserver.Texture, nullptr, &rect);
         }
 
         SDL_RenderPresent(rCtx->renderer);
