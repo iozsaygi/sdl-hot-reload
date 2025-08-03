@@ -21,6 +21,18 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
     message(FATAL_ERROR "In-source builds are not allowed, please create a 'build' directory to trigger CMake build.")
 endif ()
 
+# Download and setup 'SDL' library.
+message(STATUS "Starting to download SDL library")
+include(FetchContent)
+set(SDL_TARGET_REVISION 68bfcb6c5419f51104e74e72ea0f8d405a4615b0)
+FetchContent_Declare(SDL GIT_REPOSITORY https://github.com/libsdl-org/SDL.git GIT_TAG ${SDL_TARGET_REVISION} GIT_SHALLOW TRUE)
+FetchContent_MakeAvailable(SDL)
+
+# Ensure SDL3 is available.
+if (NOT SDL3_FOUND AND NOT APPLE)
+    message(FATAL_ERROR "Couldn't find SDL3!")
+endif ()
+
 # The 'engine' project will be compiled as executable and will watch over working directory to detect changes at runtime.
 add_subdirectory(engine)
 
