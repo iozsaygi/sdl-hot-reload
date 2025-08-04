@@ -29,6 +29,21 @@ Engine::Engine(const EngineWindow engineWindow, const GameCode& gameCode) {
     m_GameCode = gameCode;
 }
 
+bool Engine::TriggerGameCodeBuild() { // NOLINT(*-convert-member-functions-to-static)
+#ifdef __APPLE__
+    const std::string buildDirectory = PROJECT_BUILD_DIRECTORY;
+    const std::string command = "cd " + buildDirectory + " && cmake --build . --target Game --config Release";
+
+    printf("\nExecuting CMake build command:\n%s\n", command.c_str());
+    int result = std::system(command.c_str());
+    if (result != 0) printf("\nFailed to execute the game build with provided command!\n");
+
+    return result == 0;
+#else
+    return false;
+#endif // __APPLE__
+}
+
 void Engine::Update() const {
     bool isActive = true;
     SDL_Event event;

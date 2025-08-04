@@ -16,6 +16,11 @@ set(CMAKE_STATIC_LIBRARY_PREFIX "")
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
 set(CMAKE_SHARED_MODULE_PREFIX "")
 
+# Set runtime directories.
+set(PROJECT_BUILD_DIRECTORY "${CMAKE_SOURCE_DIR}/build")
+message(STATUS "[ROOT] Cached the root build directory: ${PROJECT_BUILD_DIRECTORY}")
+add_compile_definitions(PROJECT_BUILD_DIRECTORY="${PROJECT_BUILD_DIRECTORY}")
+
 # Do not allow in-source builds.
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
     message(FATAL_ERROR "In-source builds are not allowed, please create a 'build' directory to trigger CMake build.")

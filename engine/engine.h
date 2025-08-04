@@ -29,6 +29,9 @@ class Engine {
 public:
     explicit Engine(EngineWindow engineWindow, const GameCode& gameCode);
 
+    // Unfortunately this one is pretty much platform dependent.
+    bool TriggerGameCodeBuild();
+
     void Update() const;
     void Quit() const;
 
