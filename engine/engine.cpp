@@ -1,8 +1,8 @@
 #include "engine.h"
-#include <assert.h>
+#include <cassert>
 #include <iostream>
 
-Engine::Engine(const EngineWindow engineWindow) {
+Engine::Engine(const EngineWindow engineWindow, const GameCode& gameCode) {
     assert(engineWindow.Width > 0);
     assert(engineWindow.Height > 0);
     assert(engineWindow.Title != nullptr && strlen(engineWindow.Title) > 0);
@@ -25,6 +25,8 @@ Engine::Engine(const EngineWindow engineWindow) {
     }
 
     SDL_SetWindowTitle(m_Window, engineWindow.Title);
+
+    m_GameCode = gameCode;
 }
 
 void Engine::Update() const {

@@ -2,8 +2,9 @@
 
 int main(int argc, char* argv[]) {
     constexpr EngineWindow engineWindow = {640, 480, "SDL Hot Reload"};
+    constexpr GameCode gameCode = {false, "Game.dylib", nullptr, nullptr};
 
-    const Engine engine(engineWindow);
+    const Engine engine(engineWindow, gameCode);
     engine.Update();
     engine.Quit();
 
