@@ -33,6 +33,7 @@ public:
     static bool TriggerGameCodeBuild();
 
     void FreeGameCodeInstance();
+    bool UpdateGameCodeInstance();
 
     void Update() const;
     void Quit() const;

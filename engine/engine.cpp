@@ -30,12 +30,14 @@ Engine::Engine(const EngineWindow engineWindow, const GameCode& gameCode) {
 }
 
 bool Engine::TriggerGameCodeBuild() {
+    // TODO: Convert to 'std' when logging.
+
 #ifdef __APPLE__
     const std::string buildDirectory = PROJECT_BUILD_DIRECTORY;
     const std::string command = "cd " + buildDirectory + " && cmake --build . --target game --config Release";
 
     printf("\nExecuting CMake build command:\n%s\n", command.c_str());
-    int result = std::system(command.c_str());
+    const auto result = std::system(command.c_str());
     if (result != 0) printf("\nFailed to execute the game build with provided command!\n");
 
     return result == 0;
@@ -49,6 +51,34 @@ void Engine::FreeGameCodeInstance() {
     m_GameCode.IsValidated = false;
     m_GameCode.OnEngineRenderSceneCallback = nullptr;
     SDL_UnloadObject(m_GameCode.Instance);
+}
+
+bool Engine::UpdateGameCodeInstance() {
+    // First invalidate the existing instance by freeing it.
+    if (m_GameCode.Instance != nullptr) FreeGameCodeInstance();
+
+    // Trigger new build for the game code.
+    if (!TriggerGameCodeBuild()) {
+        std::cout << "Failed to build game code" << std::endl;
+        return false;
+    }
+
+    m_GameCode.Instance = SDL_LoadObject(m_GameCode.Path);
+    if (m_GameCode.Instance == nullptr) {
+        std::cout << "Failed to load game code, the reason was: " << SDL_GetError() << std::endl;
+        return false;
+    }
+
+    m_GameCode.OnEngineRenderSceneCallback =
+        reinterpret_cast<Game_OnEngineRenderScene>(SDL_LoadFunction(m_GameCode.Instance, "Game_OnEngineRenderScene"));
+    if (m_GameCode.OnEngineRenderSceneCallback == nullptr) {
+        std::cout << "Failed to load 'OnEngineRenderScene' callback, the reason was: " << SDL_GetError() << std::endl;
+        return false;
+    }
+
+    std::cout << "Successfully updated the game code" << std::endl;
+
+    return true;
 }
 
 void Engine::Update() const {
