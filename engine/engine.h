@@ -35,7 +35,7 @@ public:
     void FreeGameCodeInstance();
     bool UpdateGameCodeInstance();
 
-    void Update() const;
+    void Update();
     void Quit() const;
 
 private:

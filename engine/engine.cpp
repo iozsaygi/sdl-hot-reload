@@ -81,7 +81,7 @@ bool Engine::UpdateGameCodeInstance() {
     return true;
 }
 
-void Engine::Update() const {
+void Engine::Update() {
     bool isActive = true;
     SDL_Event event;
 
@@ -96,6 +96,9 @@ void Engine::Update() const {
                     switch (event.key.key) {
                         case SDLK_ESCAPE:
                             isActive = false;
+                            break;
+                        case SDLK_SPACE:
+                            UpdateGameCodeInstance();
                             break;
                         default:;
                     }
