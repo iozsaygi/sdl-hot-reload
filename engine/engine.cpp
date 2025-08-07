@@ -44,6 +44,13 @@ bool Engine::TriggerGameCodeBuild() {
 #endif // __APPLE__
 }
 
+void Engine::FreeGameCodeInstance() {
+    assert(m_GameCode.Instance != nullptr);
+    m_GameCode.IsValidated = false;
+    m_GameCode.OnEngineRenderSceneCallback = nullptr;
+    SDL_UnloadObject(m_GameCode.Instance);
+}
+
 void Engine::Update() const {
     bool isActive = true;
     SDL_Event event;

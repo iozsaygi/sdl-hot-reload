@@ -32,6 +32,8 @@ public:
     // Unfortunately this one is pretty much platform dependent.
     static bool TriggerGameCodeBuild();
 
+    void FreeGameCodeInstance();
+
     void Update() const;
     void Quit() const;
 
