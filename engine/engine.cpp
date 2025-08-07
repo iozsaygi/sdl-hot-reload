@@ -57,6 +57,9 @@ bool Engine::UpdateGameCodeInstance() {
     // First invalidate the existing instance by freeing it.
     if (m_GameCode.Instance != nullptr) FreeGameCodeInstance();
 
+    // Invalidate the instance to prevent crashes within update loop.
+    m_GameCode.IsValidated = false;
+
     // Trigger new build for the game code.
     if (!TriggerGameCodeBuild()) {
         std::cout << "Failed to build game code" << std::endl;
@@ -75,6 +78,8 @@ bool Engine::UpdateGameCodeInstance() {
         std::cout << "Failed to load 'OnEngineRenderScene' callback, the reason was: " << SDL_GetError() << std::endl;
         return false;
     }
+
+    m_GameCode.IsValidated = true;
 
     std::cout << "Successfully updated the game code" << std::endl;
 
@@ -106,15 +111,23 @@ void Engine::Update() {
                 default:;
             }
         }
+
+        // Render scene.
+        SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
+        SDL_RenderClear(m_Renderer);
+
+        if (m_GameCode.IsValidated) {
+            SDL_FRect rect;
+            rect.x = 320;
+            rect.y = 200;
+            rect.w = 128;
+            rect.h = 128;
+
+            m_GameCode.OnEngineRenderSceneCallback(m_Renderer, rect);
+        }
+
+        SDL_RenderPresent(m_Renderer);
     }
-
-    // Render scene.
-    SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
-    SDL_RenderClear(m_Renderer);
-
-    // TODO: Render calls goes here.
-
-    SDL_RenderPresent(m_Renderer);
 }
 
 void Engine::Quit() const {
