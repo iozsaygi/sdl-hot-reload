@@ -32,7 +32,7 @@ Engine::Engine(const EngineWindow engineWindow, const GameCode& gameCode) {
 bool Engine::TriggerGameCodeBuild() { // NOLINT(*-convert-member-functions-to-static)
 #ifdef __APPLE__
     const std::string buildDirectory = PROJECT_BUILD_DIRECTORY;
-    const std::string command = "cd " + buildDirectory + " && cmake --build . --target Game --config Release";
+    const std::string command = "cd " + buildDirectory + " && cmake --build . --target game --config Release";
 
     printf("\nExecuting CMake build command:\n%s\n", command.c_str());
     int result = std::system(command.c_str());
