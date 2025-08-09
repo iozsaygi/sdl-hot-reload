@@ -31,7 +31,7 @@ In general, here is the current workflow:
 
 1. Press the space key to trigger the update process for the game code instance.
 2. Game code will load, and a rectangle will be visible on the screen if the build passes.
-3. Change game.cpp and press space key again to reflect changes on the engine executable.
+3. Change `game.cpp` and press space key again to reflect changes on the engine executable.
 
 ## License
 
