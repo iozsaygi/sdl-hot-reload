@@ -7,6 +7,8 @@ game code instances at runtime.
 The current workflow relies on macOS APIs, but it should be relatively straightforward to port this workflow to other
 operating systems, such as Windows.
 
+![Render call change](https://github.com/iozsaygi/sdl-hot-reload/blob/main/media/render-call-change.gif?raw=true)
+
 I wrote a [blog post](https://iozsaygi.github.io/2025/01/06/hot-reloading-ccpp-code-with-sdl.html) about this recently;
 check it if you want to get a bit more detail.
 
