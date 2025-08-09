@@ -1,6 +1,7 @@
 # SDL Hot Reload
 
-This is an experimental and research repository to learn more about hot reloading game code with the help of the SDL
+This is an experimental and research repository to learn more about hot reloading game code with the help of
+the [SDL](https://www.libsdl.org)
 library. The main idea is to compile game code as a shared library and provide an executable program (engine) to manage
 game code instances at runtime.
 
