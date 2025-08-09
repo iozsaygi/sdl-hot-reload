@@ -23,8 +23,9 @@ check it if you want to get a bit more detail.
 
 ## How does it work?
 
-After running the engine executable, you can press the Space key to trigger the update process for the game code
-instance. Any changes made to game.cpp will be reflected in the new update of the game code.
+After running the engine executable, you can press the `Space` key to trigger the update process for the game code
+instance. Any changes made to [game.cpp](https://github.com/iozsaygi/sdl-hot-reload/blob/main/game/game.cpp) will be
+reflected in the new update of the game code.
 
 In general, here is the current workflow:
 
