@@ -15,6 +15,15 @@ check it if you want to get a bit more detail.
 
 ## Building
 
+### Windows
+
+- Download and install [Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/community/) with the
+  `Desktop development with C++` workload
+- Ensure that `MSBuild` is added to Windows environment variables
+- Download and install [CMake](https://cmake.org/)
+- `git clone https://github.com/iozsaygi/sdl-hot-reload`
+- Run the `win32-build.bat`
+
 ### macOS
 
 #### Through Homebrew
