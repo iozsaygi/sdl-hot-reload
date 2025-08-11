@@ -30,20 +30,26 @@ Engine::Engine(const EngineWindow engineWindow, const GameCode& gameCode) {
 }
 
 bool Engine::TriggerGameCodeBuild() {
-    // TODO: Convert to 'std' when logging.
+#ifdef _WIN32
+    const std::string command = "msbuild \"" GAME_SOLUTION_FILE_PATH "\" /p:Configuration=Release > NUL 2>&1";
+    std::cout << "Executing the game build with following command: " << command.c_str() << std::endl;
 
-#ifdef __APPLE__
+    const int result = std::system(command.c_str());
+    if (result != 0) std::cout << "Failed to execute the game build with provided command line!" << std::endl;
+
+    return result;
+#elif __APPLE__
     const std::string buildDirectory = PROJECT_BUILD_DIRECTORY;
     const std::string command = "cd " + buildDirectory + " && cmake --build . --target game --config Release";
 
-    printf("\nExecuting CMake build command:\n%s\n", command.c_str());
+    std::cout << "Executing the game build with following command: " << command.c_str() << std::endl;
     const auto result = std::system(command.c_str());
-    if (result != 0) printf("\nFailed to execute the game build with provided command!\n");
+    if (result != 0) std::cout << "Failed to execute the game build with provided command line!" << std::endl;
 
     return result == 0;
 #else
     return false;
-#endif // __APPLE__
+#endif // _WIN32
 }
 
 void Engine::FreeGameCodeInstance() {
