@@ -21,6 +21,13 @@ set(PROJECT_BUILD_DIRECTORY "${CMAKE_SOURCE_DIR}/build")
 message(STATUS "[ROOT] Cached the root build directory: ${PROJECT_BUILD_DIRECTORY}")
 add_compile_definitions(PROJECT_BUILD_DIRECTORY="${PROJECT_BUILD_DIRECTORY}")
 
+# Set the solution directory of 'Game' project as environment variable so we can easily access it during C++ runtime on Win32.
+if (WIN32)
+    set(GAME_SOLUTION_FILE_PATH "${CMAKE_SOURCE_DIR}/build/Game/Game.sln")
+    message(STATUS "Cached the '.sln' file path of 'Game' project: ${GAME_SOLUTION_FILE_PATH}")
+    add_compile_definitions(GAME_SOLUTION_FILE_PATH="${GAME_SOLUTION_FILE_PATH}")
+endif ()
+
 # Do not allow in-source builds.
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
     message(FATAL_ERROR "In-source builds are not allowed, please create a 'build' directory to trigger CMake build.")
